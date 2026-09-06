@@ -461,17 +461,17 @@ export const CATEGORIES = [
 ];
 
 export const CAT_ICON = {
-  All: "⊞",
-  "Computer Science": "🖥",
-  Frontend: "🎨",
-  Backend: "⚙️",
-  "Full Stack": "🌐",
-  "System Design": "🏗",
-  DSA: "📊",
-  DevOps: "🔧",
-  "AI & ML": "🤖",
-  Cloud: "☁️",
-  Tools: "🛠",
+  All: "All",
+  "Computer Science": "Computer Science",
+  Frontend: "Frontend",
+  Backend: "Backend",
+  "Full Stack": "Full Stack",
+  "System Design": "System Design",
+  DSA: "DSA",
+  DevOps: "DevOps",
+  "AI & ML": "AI & ML",
+  Cloud: "Cloud",
+  Tools: "Tools",
 };
 
 export const fmtNum = (n) =>

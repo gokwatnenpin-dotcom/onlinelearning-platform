@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { IconBolt, IconBook, IconMenu, IconSearch } from "./icons";
 
 export default function Navbar({ page, setPage, enrolled, search, setSearch }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -14,18 +15,18 @@ export default function Navbar({ page, setPage, enrolled, search, setSearch }) {
           }}
           className="flex shrink-0 cursor-pointer items-center gap-2"
         >
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-700 text-lg text-white">
-            ⚡
+          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-slate-900 text-white">
+            <IconBolt size={16} />
           </div>
           <span className="font-display text-xl font-bold text-slate-900">
-            Learn<span className="text-violet-700">Hub</span>
+            LearnHub
           </span>
         </div>
 
         {/* Search - desktop */}
         <div className="relative hidden max-w-[500px] flex-1 md:block">
-          <span className="absolute top-1/2 left-3 -translate-y-1/2 text-sm text-slate-400">
-            🔍
+          <span className="absolute top-1/2 left-3 -translate-y-1/2 text-slate-400">
+            <IconSearch size={15} />
           </span>
           <input
             value={search}
@@ -56,21 +57,21 @@ export default function Navbar({ page, setPage, enrolled, search, setSearch }) {
           ))}
           {enrolled.size > 0 && (
             <div className="flex items-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-[13px] font-medium text-slate-700">
-              📚 {enrolled.size} Enrolled
+              <IconBook size={13} /> {enrolled.size} Enrolled
             </div>
           )}
-          <button className="cursor-pointer rounded-lg bg-violet-700 px-4 py-2 font-body text-sm font-medium text-white hover:bg-violet-800">
+          <button className="cursor-pointer rounded-lg bg-slate-900 px-4 py-2 font-body text-sm font-medium text-white hover:bg-slate-800">
             Sign Up Free
           </button>
         </div>
 
         {/* Mobile toggle */}
         <button
-          className="ml-auto rounded-lg border border-slate-200 px-3 py-1.5 text-lg md:hidden"
+          className="ml-auto flex items-center rounded-lg border border-slate-200 px-3 py-1.5 text-slate-900 md:hidden"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Toggle menu"
         >
-          ☰
+          <IconMenu size={18} />
         </button>
       </div>
 
@@ -78,8 +79,8 @@ export default function Navbar({ page, setPage, enrolled, search, setSearch }) {
       {mobileOpen && (
         <div className="border-t border-slate-200 bg-white px-4 pt-3 pb-4 md:hidden">
           <div className="relative mb-3">
-            <span className="absolute top-1/2 left-3 -translate-y-1/2 text-sm text-slate-400">
-              🔍
+            <span className="absolute top-1/2 left-3 -translate-y-1/2 text-slate-400">
+              <IconSearch size={15} />
             </span>
             <input
               value={search}
@@ -114,13 +115,13 @@ export default function Navbar({ page, setPage, enrolled, search, setSearch }) {
                 {label}
               </button>
             ))}
-            <button className="flex-1 rounded-lg bg-violet-700 px-4 py-2 font-body text-sm font-medium text-white">
+            <button className="flex-1 rounded-lg bg-slate-900 px-4 py-2 font-body text-sm font-medium text-white">
               Sign Up Free
             </button>
           </div>
           {enrolled.size > 0 && (
-            <div className="mt-2 rounded-lg bg-slate-100 px-3 py-2 text-center text-[13px] font-medium text-slate-700">
-              📚 {enrolled.size} Enrolled
+            <div className="mt-2 flex items-center justify-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-center text-[13px] font-medium text-slate-700">
+              <IconBook size={13} /> {enrolled.size} Enrolled
             </div>
           )}
         </div>

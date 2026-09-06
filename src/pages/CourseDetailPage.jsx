@@ -1,5 +1,16 @@
 import { fmtNum } from "../data/courses";
 import { Badge, Stars } from "../components/ui";
+import {
+  IconBook,
+  IconBuilding,
+  IconCheck,
+  IconClock,
+  IconDownload,
+  IconInfinity,
+  IconMedal,
+  IconMobile,
+  IconUser,
+} from "../components/icons";
 
 export default function CourseDetailPage({
   course,
@@ -12,12 +23,12 @@ export default function CourseDetailPage({
 
   return (
     <div>
-      {/* Hero - simple solid */}
-      <div className="bg-slate-900 px-6 pt-10">
+      {/* Hero - plain, no color */}
+      <div className="border-b border-slate-200 bg-white px-6 pt-10">
         <div className="mx-auto max-w-[1100px]">
           <button
             onClick={onBack}
-            className="mb-6 cursor-pointer rounded-lg border border-slate-700 bg-slate-800 px-4 py-2 font-body text-[13px] text-slate-300 hover:bg-slate-700 hover:text-white"
+            className="mb-6 cursor-pointer rounded-md border border-slate-300 bg-white px-4 py-2 font-body text-[13px] text-slate-600 hover:bg-slate-50"
           >
             ← Back to Courses
           </button>
@@ -30,17 +41,17 @@ export default function CourseDetailPage({
                 <Badge text={course.category} color="#475569" />
                 <Badge text={course.level} color="#334155" />
               </div>
-              <h1 className="mb-3 font-display text-3xl leading-tight font-bold text-white">
+              <h1 className="mb-3 font-display text-3xl leading-tight font-bold text-slate-900">
                 {course.title}
               </h1>
-              <p className="mb-5 font-body text-sm leading-relaxed text-slate-400">
+              <p className="mb-5 font-body text-sm leading-relaxed text-slate-600">
                 {course.description}
               </p>
 
               <div className="mb-4 flex flex-wrap items-center gap-3">
                 <div className="flex items-center gap-1.5">
-                  <Stars rating={course.rating} size={15} />
-                  <span className="text-sm font-bold text-white">
+                  <Stars rating={course.rating} size={14} />
+                  <span className="text-sm font-bold text-slate-900">
                     {course.rating}
                   </span>
                   <span className="font-body text-xs text-slate-500">
@@ -52,17 +63,29 @@ export default function CourseDetailPage({
                 </span>
               </div>
 
-              <div className="flex flex-wrap gap-x-4 gap-y-2 font-body text-xs text-slate-400">
-                <span>📚 {course.lessons} lessons</span>
-                <span>⏱ {course.duration}</span>
-                <span>👤 {course.instructor}</span>
-                <span>🏛 {course.institution}</span>
-                {course.certificate && <span>🏅 Certificate of completion</span>}
+              <div className="flex flex-wrap gap-x-4 gap-y-2 font-body text-xs text-slate-600">
+                <span className="inline-flex items-center gap-1.5">
+                  <IconBook size={13} /> {course.lessons} lessons
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <IconClock size={13} /> {course.duration}
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <IconUser size={13} /> {course.instructor}
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <IconBuilding size={13} /> {course.institution}
+                </span>
+                {course.certificate && (
+                  <span className="inline-flex items-center gap-1.5">
+                    <IconMedal size={13} /> Certificate of completion
+                  </span>
+                )}
               </div>
             </div>
 
             {/* Card - simple */}
-            <div className="overflow-hidden rounded-lg border border-slate-200 bg-white lg:-mb-10 lg:shadow-sm">
+            <div className="overflow-hidden rounded-md border border-slate-200 bg-white lg:-mb-10">
               <img
                 src={course.image}
                 alt={course.title}
@@ -80,10 +103,10 @@ export default function CourseDetailPage({
                 )}
                 <button
                   onClick={() => onEnroll(course.id)}
-                  className={`mb-2 w-full cursor-pointer rounded-lg px-4 py-3 font-body text-sm font-semibold text-white ${
+                  className={`mb-2 w-full cursor-pointer rounded-md px-4 py-3 font-body text-sm font-medium text-white ${
                     isE
                       ? "bg-emerald-600 hover:bg-emerald-700"
-                      : "bg-violet-700 hover:bg-violet-800"
+                      : "bg-slate-900 hover:bg-slate-800"
                   }`}
                 >
                   {isE
@@ -97,18 +120,19 @@ export default function CourseDetailPage({
                 </p>
                 <div className="flex flex-col gap-2">
                   {[
-                    { icon: "📱", text: "Access on mobile and desktop" },
-                    { icon: "♾️", text: "Full lifetime access" },
-                    { icon: "📥", text: "Downloadable resources" },
+                    { icon: <IconMobile size={14} />, text: "Access on mobile and desktop" },
+                    { icon: <IconInfinity size={14} />, text: "Full lifetime access" },
+                    { icon: <IconDownload size={14} />, text: "Downloadable resources" },
                     ...(course.certificate
-                      ? [{ icon: "🏅", text: "Certificate of completion" }]
+                      ? [{ icon: <IconMedal size={14} />, text: "Certificate of completion" }]
                       : []),
                   ].map((f, i) => (
                     <div
                       key={i}
-                      className="flex gap-2 font-body text-[13px] text-slate-600"
+                      className="flex items-center gap-2 font-body text-[13px] text-slate-600"
                     >
-                      <span>{f.icon}</span> <span>{f.text}</span>
+                      <span className="text-slate-900">{f.icon}</span>
+                      <span>{f.text}</span>
                     </div>
                   ))}
                 </div>
@@ -122,7 +146,7 @@ export default function CourseDetailPage({
       <div className="bg-slate-50 px-6 pt-14 pb-12">
         <div className="mx-auto max-w-[720px]">
           {/* What you'll learn */}
-          <section className="mb-4 rounded-lg border border-slate-200 bg-white p-6">
+          <section className="mb-4 rounded-md border border-slate-200 bg-white p-6">
             <h2 className="mb-3 font-display text-xl font-bold text-slate-900">
               What you&apos;ll learn
             </h2>
@@ -132,7 +156,7 @@ export default function CourseDetailPage({
           </section>
 
           {/* Topics */}
-          <section className="mb-4 rounded-lg border border-slate-200 bg-white p-6">
+          <section className="mb-4 rounded-md border border-slate-200 bg-white p-6">
             <h2 className="mb-3 font-display text-xl font-bold text-slate-900">
               Topics Covered
             </h2>
@@ -149,7 +173,7 @@ export default function CourseDetailPage({
           </section>
 
           {/* Requirements */}
-          <section className="mb-4 rounded-lg border border-slate-200 bg-white p-6">
+          <section className="mb-4 rounded-md border border-slate-200 bg-white p-6">
             <h2 className="mb-3 font-display text-xl font-bold text-slate-900">
               Requirements
             </h2>
@@ -159,7 +183,9 @@ export default function CourseDetailPage({
                   key={r}
                   className="mb-2 flex gap-2 font-body text-sm text-slate-600"
                 >
-                  <span className="shrink-0 font-bold text-slate-700">✓</span>{" "}
+                  <span className="mt-0.5 shrink-0 text-slate-900">
+                    <IconCheck size={14} />
+                  </span>
                   {r}
                 </li>
               ))}
@@ -167,12 +193,12 @@ export default function CourseDetailPage({
           </section>
 
           {/* Instructor */}
-          <section className="rounded-lg border border-slate-200 bg-white p-6">
+          <section className="rounded-md border border-slate-200 bg-white p-6">
             <h2 className="mb-3 font-display text-xl font-bold text-slate-900">
               Your Instructor
             </h2>
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-violet-700 font-display text-xl font-bold text-white">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-slate-900 font-display text-xl font-bold text-white">
                 {course.instructor[0]}
               </div>
               <div>

@@ -1,3 +1,5 @@
+import { IconBolt, IconLinkedin, IconWeb, IconXLogo } from "./icons";
+
 export default function Footer() {
   return (
     <footer className="bg-slate-900 px-6 pt-12 pb-6 text-white">
@@ -6,26 +8,25 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="mb-3 flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-700 text-base text-white">
-                ⚡
+              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-white text-slate-900">
+                <IconBolt size={15} />
               </div>
-              <span className="font-display text-lg font-bold">
-                Learn<span className="text-slate-300">Hub</span>
-              </span>
+              <span className="font-display text-lg font-bold">LearnHub</span>
             </div>
             <p className="mb-4 max-w-[280px] font-body text-sm leading-relaxed text-slate-400">
               The fastest path from beginner to professional software
               engineer. Learn from the world&apos;s best instructors.
             </p>
             <div className="flex gap-2">
-              {["𝕏", "in", "◉"].map((s) => (
-                <div
-                  key={s}
-                  className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg bg-slate-800 text-sm text-slate-400 hover:bg-slate-700 hover:text-white"
-                >
-                  {s}
-                </div>
-              ))}
+              <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+                <IconXLogo size={14} />
+              </div>
+              <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+                <IconLinkedin size={14} />
+              </div>
+              <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+                <IconWeb size={14} />
+              </div>
             </div>
           </div>
 

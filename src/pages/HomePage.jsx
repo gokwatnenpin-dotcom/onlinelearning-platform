@@ -1,5 +1,13 @@
-import { CATEGORIES, CAT_ICON, COURSES } from "../data/courses";
+import { CATEGORIES, COURSES } from "../data/courses";
 import CourseCard from "../components/CourseCard";
+import { Stars } from "../components/ui";
+import {
+  CategoryIcon,
+  IconBook,
+  IconCheck,
+  IconMedal,
+  IconSearch,
+} from "../components/icons";
 
 export default function HomePage({
   courses,
@@ -15,44 +23,49 @@ export default function HomePage({
 
   return (
     <div>
-      {/* HERO - simple solid */}
-      <section className="bg-slate-900 px-6 py-16">
+      {/* HERO - plain, no color, no gradient */}
+      <section className="border-b border-slate-200 bg-white px-6 py-14">
         <div className="mx-auto max-w-7xl">
-          {/* Pill */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-slate-800 px-4 py-1.5">
-            <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
-            <span className="font-body text-xs font-medium text-slate-300">
+          {/* Tag - rough rectangle, not a perfect pill */}
+          <div className="mb-5 inline-flex items-center gap-2 rounded-md border border-slate-300 bg-slate-50 px-3 py-1.5">
+            <span className="inline-block h-2 w-2 bg-slate-900" />
+            <span className="font-body text-xs font-medium text-slate-600">
               Software Engineering · 500K+ students enrolled
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="mb-4 max-w-[720px] font-display text-[clamp(32px,5vw,56px)] leading-tight font-extrabold text-white">
+          <h1 className="mb-4 max-w-[720px] font-display text-[clamp(28px,4vw,44px)] leading-tight font-bold text-slate-900">
             Master Software Engineering — Ship Real Products
           </h1>
 
-          <p className="mb-8 max-w-[540px] font-body text-base leading-relaxed text-slate-400">
+          <p className="mb-6 max-w-[540px] font-body text-base leading-relaxed text-slate-600">
             Learn from instructors at Harvard, Udemy, and top tech
             institutions. Real projects, real skills, industry-recognized
             certificates.
           </p>
 
           {/* Search */}
-          <div className="mb-6 flex max-w-[540px] flex-col gap-2 sm:flex-row">
-            <input
-              onKeyDown={(e) => e.key === "Enter" && setPage("courses")}
-              placeholder="e.g. React, Node.js, Machine Learning…"
-              className="w-full flex-1 rounded-lg border border-slate-300 bg-white px-4 py-3 font-body text-sm text-slate-900 outline-none placeholder:text-slate-400"
-            />
+          <div className="mb-5 flex max-w-[540px] flex-col gap-2 sm:flex-row">
+            <div className="relative flex-1">
+              <span className="absolute top-1/2 left-3 -translate-y-1/2 text-slate-400">
+                <IconSearch size={15} />
+              </span>
+              <input
+                onKeyDown={(e) => e.key === "Enter" && setPage("courses")}
+                placeholder="e.g. React, Node.js, Machine Learning…"
+                className="w-full flex-1 rounded-md border border-slate-300 bg-white py-2.5 pr-4 pl-9 font-body text-sm text-slate-900 outline-none placeholder:text-slate-400"
+              />
+            </div>
             <button
               onClick={() => setPage("courses")}
-              className="shrink-0 cursor-pointer rounded-lg bg-violet-700 px-6 py-3 font-body text-sm font-semibold whitespace-nowrap text-white hover:bg-violet-800"
+              className="shrink-0 cursor-pointer rounded-md bg-slate-900 px-5 py-2.5 font-body text-sm font-medium whitespace-nowrap text-white hover:bg-slate-800"
             >
               Find Courses
             </button>
           </div>
 
-          {/* Quick filters */}
+          {/* Quick filters - rough rectangles */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-body text-[13px] text-slate-500">
               Jump to:
@@ -71,7 +84,7 @@ export default function HomePage({
                   setCategory(cat);
                   setPage("courses");
                 }}
-                className="cursor-pointer rounded-full border border-slate-700 bg-slate-800 px-3.5 py-1.5 font-body text-[13px] text-slate-300 hover:bg-slate-700 hover:text-white"
+                className="cursor-pointer rounded-md border border-slate-300 bg-white px-3 py-1.5 font-body text-[13px] text-slate-700 hover:bg-slate-100"
               >
                 {cat}
               </button>
@@ -79,15 +92,15 @@ export default function HomePage({
           </div>
 
           {/* Stats */}
-          <div className="mt-12 grid max-w-[640px] grid-cols-2 gap-6 border-t border-slate-800 pt-8 sm:grid-cols-4">
+          <div className="mt-10 grid max-w-[640px] grid-cols-2 gap-6 border-t border-slate-200 pt-6 sm:grid-cols-4">
             {[
               ["12", "Core Courses"],
               ["500K+", "Students Enrolled"],
-              ["4.8★", "Avg Rating"],
+              ["4.8", "Avg Rating"],
               ["3 FREE", "Courses Available"],
             ].map(([n, l]) => (
               <div key={l}>
-                <div className="font-display text-2xl font-bold text-white">
+                <div className="font-display text-xl font-bold text-slate-900">
                   {n}
                 </div>
                 <div className="mt-1 font-body text-xs text-slate-500">{l}</div>
@@ -111,7 +124,7 @@ export default function HomePage({
             </div>
             <button
               onClick={() => setPage("courses")}
-              className="w-fit cursor-pointer rounded-lg border border-slate-300 bg-white px-4 py-2 font-body text-[13px] font-medium text-slate-700 hover:bg-slate-50"
+              className="w-fit cursor-pointer rounded-md border border-slate-300 bg-white px-4 py-2 font-body text-[13px] font-medium text-slate-700 hover:bg-slate-50"
             >
               View All Courses →
             </button>
@@ -126,9 +139,11 @@ export default function HomePage({
                     setCategory(cat);
                     setPage("courses");
                   }}
-                  className="cursor-pointer rounded-lg border border-slate-200 bg-slate-50 p-4 text-left hover:border-slate-300 hover:bg-slate-100"
+                  className="cursor-pointer rounded-md border border-slate-200 bg-slate-50 p-4 text-left hover:bg-slate-100"
                 >
-                  <div className="mb-2 text-2xl">{CAT_ICON[cat]}</div>
+                  <div className="mb-2">
+                    <CategoryIcon category={cat} size={24} />
+                  </div>
                   <div className="mb-1 font-display text-sm font-bold text-slate-900">
                     {cat}
                   </div>
@@ -156,7 +171,7 @@ export default function HomePage({
             </div>
             <button
               onClick={() => setPage("courses")}
-              className="w-fit cursor-pointer rounded-lg border border-slate-300 bg-white px-4 py-2 font-body text-[13px] font-medium text-slate-700 hover:bg-slate-50"
+              className="w-fit cursor-pointer rounded-md border border-slate-300 bg-white px-4 py-2 font-body text-[13px] font-medium text-slate-700 hover:bg-slate-50"
             >
               See All 12 →
             </button>
@@ -189,26 +204,28 @@ export default function HomePage({
           <div className="grid grid-cols-1 gap-4 text-left sm:grid-cols-3">
             {[
               {
-                icon: "🔍",
+                icon: <IconSearch size={20} />,
                 title: "Browse Courses",
                 body: "Filter by topic, level, or price. Read reviews from real students before enrolling.",
               },
               {
-                icon: "📚",
+                icon: <IconBook size={20} />,
                 title: "Enroll & Learn",
                 body: "Watch lessons at your own pace. Complete projects and get personalized feedback.",
               },
               {
-                icon: "🏅",
+                icon: <IconMedal size={20} />,
                 title: "Earn Your Certificate",
                 body: "Finish the course, pass assessments, and earn a shareable certificate for your portfolio.",
               },
             ].map((s, i) => (
               <div
                 key={i}
-                className="rounded-lg border border-slate-200 bg-slate-50 p-5"
+                className="rounded-md border border-slate-200 bg-slate-50 p-5"
               >
-                <div className="mb-3 text-3xl">{s.icon}</div>
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-slate-300 bg-white text-slate-900">
+                  {s.icon}
+                </div>
                 <div className="mb-2 font-display text-base font-bold text-slate-900">
                   {s.title}
                 </div>
@@ -221,8 +238,8 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* TRUST BANNER - simple solid */}
-      <section className="bg-violet-700 px-6 py-12">
+      {/* TRUST BANNER - plain */}
+      <section className="border-y border-slate-200 bg-white px-6 py-10">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 text-center lg:grid-cols-4">
           {[
             { n: "500K+", l: "Students Enrolled" },
@@ -231,10 +248,10 @@ export default function HomePage({
             { n: "98%", l: "Satisfaction Rate" },
           ].map((s) => (
             <div key={s.l}>
-              <div className="font-display text-3xl font-bold text-white">
+              <div className="font-display text-3xl font-bold text-slate-900">
                 {s.n}
               </div>
-              <div className="mt-1 font-body text-sm text-violet-100">{s.l}</div>
+              <div className="mt-1 font-body text-sm text-slate-500">{s.l}</div>
             </div>
           ))}
         </div>
@@ -275,9 +292,9 @@ export default function HomePage({
             ].map((t, i) => (
               <div
                 key={i}
-                className="rounded-lg border border-slate-200 bg-white p-5"
+                className="rounded-md border border-slate-200 bg-white p-5"
               >
-                <span className="text-sm text-amber-600">★★★★★</span>
+                <Stars rating={5} size={12} />
                 <p className="my-3 font-body text-sm leading-relaxed text-slate-600 italic">
                   &quot;{t.quote}&quot;
                 </p>
@@ -286,11 +303,11 @@ export default function HomePage({
                     src={t.img}
                     alt={t.name}
                     loading="lazy"
-                    className="h-10 w-10 rounded-full object-cover"
+                    className="h-10 w-10 rounded-md bg-slate-200 object-cover"
                   />
                   <div>
-                    <div className="font-display text-sm font-bold text-slate-900">
-                      {t.name}
+                    <div className="flex items-center gap-1.5 font-display text-sm font-bold text-slate-900">
+                      {t.name} <IconCheck size={12} />
                     </div>
                     <div className="font-body text-xs text-slate-500">
                       {t.role}
@@ -303,20 +320,20 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* CTA STRIP - simple solid */}
-      <section className="bg-slate-900 px-6 py-14 text-center">
+      {/* CTA STRIP - plain */}
+      <section className="border-t border-slate-200 bg-white px-6 py-14 text-center">
         <div className="mx-auto max-w-[600px]">
-          <h2 className="mb-3 font-display text-3xl font-bold text-white">
+          <h2 className="mb-3 font-display text-3xl font-bold text-slate-900">
             Ready to level up?
           </h2>
-          <p className="mb-6 font-body text-sm text-slate-400">
+          <p className="mb-6 font-body text-sm text-slate-600">
             Join 500,000 students already building their software engineering
             careers on LearnHub.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <button
               onClick={() => setPage("courses")}
-              className="cursor-pointer rounded-lg bg-violet-700 px-6 py-3 font-body text-sm font-semibold text-white hover:bg-violet-800"
+              className="cursor-pointer rounded-md bg-slate-900 px-6 py-3 font-body text-sm font-medium text-white hover:bg-slate-800"
             >
               Browse All Courses
             </button>
@@ -325,7 +342,7 @@ export default function HomePage({
                 setCategory("All");
                 setPage("courses");
               }}
-              className="cursor-pointer rounded-lg border border-slate-600 bg-transparent px-6 py-3 font-body text-sm font-medium text-slate-200 hover:bg-slate-800"
+              className="cursor-pointer rounded-md border border-slate-300 bg-white px-6 py-3 font-body text-sm font-medium text-slate-700 hover:bg-slate-50"
             >
               Start with Free Courses
             </button>

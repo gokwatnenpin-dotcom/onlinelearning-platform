@@ -1,5 +1,12 @@
 import { fmtNum } from "../data/courses";
 import { Badge, Stars } from "./ui";
+import {
+  IconBook,
+  IconClock,
+  IconHeart,
+  IconMedal,
+  IconUsers,
+} from "./icons";
 
 export default function CourseCard({
   course,
@@ -34,13 +41,13 @@ export default function CourseCard({
             onWishlist(course.id);
           }}
           aria-label="Toggle wishlist"
-          className="absolute top-2.5 right-2.5 flex h-8 w-8 items-center justify-center rounded-full bg-white text-base shadow-sm"
+          className="absolute top-2.5 right-2.5 flex h-8 w-8 items-center justify-center rounded-md bg-white text-slate-900 shadow-sm"
         >
-          {isW ? "❤️" : "🤍"}
+          <IconHeart size={16} filled={isW} />
         </button>
         <div className="absolute bottom-2.5 left-3 flex gap-1.5">
-          <span className="rounded bg-slate-900 px-2 py-[2px] text-[11px] text-white">
-            ⏱ {course.duration}
+          <span className="flex items-center gap-1 rounded bg-slate-900 px-2 py-[2px] text-[11px] text-white">
+            <IconClock size={11} /> {course.duration}
           </span>
           <span className="rounded bg-slate-900 px-2 py-[2px] text-[11px] text-white">
             {course.level}
@@ -53,7 +60,7 @@ export default function CourseCard({
         className="flex flex-1 flex-col p-4"
         onClick={() => onView(course)}
       >
-        <div className="mb-1 text-[11px] font-semibold tracking-wide text-violet-700 uppercase">
+        <div className="mb-1 text-[11px] font-semibold tracking-wide text-slate-600 uppercase">
           {course.category}
         </div>
         <h3 className="mb-2 flex-1 font-display text-[15px] leading-snug font-bold text-slate-900">
@@ -73,9 +80,17 @@ export default function CourseCard({
           </span>
         </div>
         <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-slate-500">
-          <span>📚 {course.lessons} lessons</span>
-          {course.certificate && <span>🏅 Certificate</span>}
-          <span>👥 {fmtNum(course.enrolled)}</span>
+          <span className="inline-flex items-center gap-1">
+            <IconBook size={12} /> {course.lessons} lessons
+          </span>
+          {course.certificate && (
+            <span className="inline-flex items-center gap-1">
+              <IconMedal size={12} /> Certificate
+            </span>
+          )}
+          <span className="inline-flex items-center gap-1">
+            <IconUsers size={12} /> {fmtNum(course.enrolled)}
+          </span>
         </div>
       </div>
 
@@ -98,7 +113,7 @@ export default function CourseCard({
           className={`rounded-lg px-4 py-2 text-[13px] font-medium text-white ${
             isE
               ? "bg-emerald-600 hover:bg-emerald-700"
-              : "bg-violet-700 hover:bg-violet-800"
+              : "bg-slate-900 hover:bg-slate-800"
           }`}
         >
           {isE ? "✓ Enrolled" : "Enroll Now"}

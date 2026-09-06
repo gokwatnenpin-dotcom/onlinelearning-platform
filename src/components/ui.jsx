@@ -1,17 +1,46 @@
 import { fmtNum } from "../data/courses";
+import { IconStar } from "./icons";
 
 export function Stars({ rating, size = 13 }) {
   const full = Math.floor(rating);
   const half = rating % 1 >= 0.5;
+  const stars = [];
+  for (let i = 0; i < 5; i++) {
+    if (i < full) {
+      stars.push(<IconStar key={i} size={size} filled />);
+    } else if (i === full && half) {
+      // Half star: gray outline with black left half
+      stars.push(
+        <span
+          key={i}
+          className="relative inline-block"
+          style={{ width: size, height: size }}
+        >
+          <span className="absolute inset-0 text-slate-300">
+            <IconStar size={size} filled={false} />
+          </span>
+          <span
+            className="absolute inset-0 overflow-hidden text-slate-900"
+            style={{ width: "50%" }}
+          >
+            <IconStar size={size} filled />
+          </span>
+        </span>,
+      );
+    } else {
+      stars.push(
+        <span key={i} className="text-slate-300">
+          <IconStar size={size} filled={false} />
+        </span>,
+      );
+    }
+  }
   return (
     <span
-      className="text-amber-600 leading-none"
-      style={{ fontSize: size }}
+      className="inline-flex items-center gap-[2px] text-slate-900"
       aria-label={`${rating} out of 5 stars`}
     >
-      {"★".repeat(full)}
-      {half ? "½" : ""}
-      {"☆".repeat(5 - full - (half ? 1 : 0))}
+      {stars}
     </span>
   );
 }
