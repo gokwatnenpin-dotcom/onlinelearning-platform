@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IconBolt, IconBook, IconMenu, IconSearch } from "./icons";
 
-export default function Navbar({ page, setPage, enrolled, search, setSearch }) {
+export default function Navbar({ page, setPage, enrolled, search, setSearch, user, onAuth, onSignOut }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -42,6 +42,7 @@ export default function Navbar({ page, setPage, enrolled, search, setSearch }) {
           {[
             ["home", "Home"],
             ["courses", "Courses"],
+            ...(user ? [["learning", "My Learning"]] : []),
           ].map(([p, label]) => (
             <button
               key={p}
@@ -60,9 +61,7 @@ export default function Navbar({ page, setPage, enrolled, search, setSearch }) {
               <IconBook size={13} /> {enrolled.size} Enrolled
             </div>
           )}
-          <button className="cursor-pointer rounded-lg bg-slate-900 px-4 py-2 font-body text-sm font-medium text-white hover:bg-slate-800">
-            Sign Up Free
-          </button>
+          {user ? <div className="ml-1 flex items-center gap-2"><button onClick={() => setPage("learning")} className="cursor-pointer rounded-lg border border-slate-300 px-3 py-2 font-body text-sm font-medium text-slate-700 hover:bg-slate-50">{user.name.split(" ")[0]}</button><button onClick={onSignOut} className="cursor-pointer px-2 py-2 font-body text-xs text-slate-500 hover:text-slate-900">Sign out</button></div> : <div className="ml-1 flex items-center gap-2"><button onClick={() => onAuth("signin")} className="cursor-pointer px-2 py-2 font-body text-sm text-slate-600 hover:text-slate-900">Sign in</button><button onClick={() => onAuth("signup")} className="cursor-pointer rounded-lg bg-slate-900 px-4 py-2 font-body text-sm font-medium text-white hover:bg-slate-800">Sign Up Free</button></div>}
         </div>
 
         {/* Mobile toggle */}
@@ -99,6 +98,7 @@ export default function Navbar({ page, setPage, enrolled, search, setSearch }) {
             {[
               ["home", "Home"],
               ["courses", "Courses"],
+              ...(user ? [["learning", "My Learning"]] : []),
             ].map(([p, label]) => (
               <button
                 key={p}
@@ -115,10 +115,8 @@ export default function Navbar({ page, setPage, enrolled, search, setSearch }) {
                 {label}
               </button>
             ))}
-            <button className="flex-1 rounded-lg bg-slate-900 px-4 py-2 font-body text-sm font-medium text-white">
-              Sign Up Free
-            </button>
           </div>
+          <div className="mt-2 flex gap-2">{user ? <><button onClick={() => { setPage("learning"); setMobileOpen(false); }} className="flex-1 rounded-lg border border-slate-300 px-4 py-2 font-body text-sm font-medium text-slate-700">{user.name.split(" ")[0]}’s learning</button><button onClick={() => { onSignOut(); setMobileOpen(false); }} className="rounded-lg border border-slate-300 px-4 py-2 text-sm text-slate-600">Sign out</button></> : <><button onClick={() => { onAuth("signin"); setMobileOpen(false); }} className="flex-1 rounded-lg border border-slate-300 px-4 py-2 font-body text-sm font-medium text-slate-700">Sign in</button><button onClick={() => { onAuth("signup"); setMobileOpen(false); }} className="flex-1 rounded-lg bg-slate-900 px-4 py-2 font-body text-sm font-medium text-white">Sign Up Free</button></>}</div>
           {enrolled.size > 0 && (
             <div className="mt-2 flex items-center justify-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-center text-[13px] font-medium text-slate-700">
               <IconBook size={13} /> {enrolled.size} Enrolled
